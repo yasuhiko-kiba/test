@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link href="starter-template.css" th:href="@{/css/starter-template.css}"rel="stylesheet">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+<main role="main" class="container">
+	<div class="starter-template">
+    	<h1 th:text="${title}">Bootstrap starter template</h1>
+  	</div>
+  	<!--<div th:unless="${#strings.isEmpty(complete)}" >
+			<div th:text="${complete}" class="alert alert-success" role="alert">
+		  		A simple success alert?check it out!
+			</div>
+		</div>-->
+	
+	<form method="post" action="#" th:each="obj : ${employeeInfo}" th:action="@{/employee/edit/{code}(code=${obj.code})}">
+	  <div class="form-group">
+	    <label for="code">社員番号（10桁）</label>
+	    <input type="text" name="code" class="form-control" id="code" th:value="*{obj.code}">
+	  </div>
+	  <!--<div class="text-danger mb-4" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>-->
+	  <div class="form-group">
+	    <label for="name">氏名</label>
+	    <input type="text" name="name" class="form-control" id="name" th:value="*{obj.name}">
+	  </div>
+	  <!--<div class="text-danger mb-4" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>-->
+	  <div class="form-group">
+	  <label for-"role">ロール</label>
+	  <select id="role">
+	  <option
+	  	th:each="roleList : ${roleList}"
+	  	th:value="${roleList.key}"
+	  	th:text="${roleList.value}"
+	  	th:selected="${roleList.key == selectRole}">
+	  </option>
+	  </select>
+	  </div>
+	  <button type="submit" class="btn btn-primary">登録</button>
+	</form>
+	<p><a th:href="@{/employee}">一覧に戻る</a></p>
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="@{/js/jquery-slim.min.js}"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"  th:src="@{/js/popper.min.js}"></script>
+    <script src="../../dist/js/bootstrap.min.js"  th:src="@{/js/bootstrap.min.js}"></script>
+ </body>
+</html>
